@@ -1,0 +1,13 @@
+.card{
+    text-align: center;
+}
+
+.card-img-top{
+    width: 75%;
+    height: 250px;
+    align-content: center;
+}
+
+.card-body{
+    text-align: center;
+}
