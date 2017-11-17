@@ -16,10 +16,10 @@ export class UnCollegueComponent implements OnInit {
   }
 
   jaime(){
-    this.collegue.score+=10
+    this.collegue._score+=10
   }
 
   jeDeteste(){
-    this.collegue.score-=5
+    this.collegue._score-=5
   }
 }

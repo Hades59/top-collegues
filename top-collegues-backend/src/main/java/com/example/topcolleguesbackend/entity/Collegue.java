@@ -1,13 +1,13 @@
-/**
- * 
- */
-package dev.tcb.entite;
+package com.example.topcolleguesbackend.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author ETY3
@@ -20,16 +20,35 @@ public class Collegue {
 	/** id : Integer */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonIgnore
 	private Integer id;
 	
 	/** nom : String */
+	@JsonProperty("_nom")
 	private String nom;
 	
 	/** ImageUrl : String */
-	private String ImageUrl;
+	@JsonProperty("_urlImage")
+	private String imageUrl;
 	
 	/** score : Integer */
+	@JsonProperty("_score")
 	private Integer score;
+	
+	public Collegue() {
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @param nom
+	 * @param imageUrl
+	 * @param score
+	 */
+	public Collegue(String nom, String imageUrl, Integer score) {
+		super();
+		this.nom = nom;
+		this.imageUrl = imageUrl;
+		this.score = score;
+	}
 
 	/** Getter for id
 	 * @return the id
@@ -63,14 +82,14 @@ public class Collegue {
 	 * @return the imageUrl
 	 */
 	public String getImageUrl() {
-		return ImageUrl;
+		return imageUrl;
 	}
 
 	/** Setter for ImageUrl
 	 * @param imageUrl the imageUrl to set
 	 */
 	public void setImageUrl(String imageUrl) {
-		this.ImageUrl = imageUrl;
+		this.imageUrl = imageUrl;
 	}
 
 	/** Getter for score

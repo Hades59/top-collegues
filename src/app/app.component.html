@@ -24,7 +24,7 @@
       </div>
       </div><br>
   </form>
-  <ngb-alert *ngIf="affichAlert" type="success" (close)="affichAlert=false">Le collègue {{collegue[collegue.length -1].nom}} a été ajouté avec succès!</ngb-alert>
+  <ngb-alert *ngIf="affichAlert" type="success" (close)="affichAlert=false">Le collègue {{collegue[collegue.length -1]._nom}} a été ajouté avec succès!</ngb-alert>
   <div class="row">
     <div class="col-4" *ngFor="let col of collegue">
       <app-un-collegue [collegue]="col"></app-un-collegue>
