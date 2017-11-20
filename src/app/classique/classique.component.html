@@ -1,0 +1,24 @@
+<div class="row">
+  <label for="limite" class="">Limiter à: </label>
+  <input type="text" class="form-control"  (keyup)="onLimit($event)">
+  <label for="filtre" class="onFilter($event)">Filtre par pseudo: </label>
+  <input type="text" class="form-control" (keyup)="onFilter($event)">
+  <div class="row">
+    <!--<div class="col-4" *ngFor="let col of collegue | slice:0:limite">-->
+        <div class="card" *ngFor="let col of collegue | slice:0:limite | filter:filtre">
+            <div style="width:100%;height:100%;">
+              <img class="card-img-top" [src]="col._urlImage" alt="{{col.pseudo}}">
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">{{col._nom | uppercase}}</h4>
+              <h4 class="card-title" innerHTML="{{col._score|score}}"></h4>
+              <button class="btn btn-success" (click)="jaime(col)">J'aime</button>
+              <button class="btn btn-danger" (click)="jeDeteste(col)">Je déteste</button>
+            </div>
+        </div>
+    <!--</div>-->    
+  </div>
+</div>
+
+
+

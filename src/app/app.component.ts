@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   // TODO Ajouter un champ collegues qui est de type Tableau de Collegue
   private collegue:Collegue[]
-  private affichAlert:boolean
+  affichAlert:boolean
 
   constructor(private collegueService:CollegueService) {
   }
@@ -29,13 +29,13 @@ export class AppComponent implements OnInit {
 */
   this.affichAlert=false
 
-  this.collegueService.listerCollegues().then(colle => this.collegue = colle, err=>console.log(err))
+ // this.collegueService.listerCollegues().then(colle => this.collegue = colle, err=>console.log(err))
   }
 
   add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
     // pour récupérer la valeur saisie, utiliser la propriété value
     // exemple => pseudo.value
-    this.collegueService.sauvegarder(new Collegue(pseudo.value,imageUrl.value,100))
+    this.collegueService.sauvegarder(new Collegue(pseudo.value,imageUrl.value,0))
     .then(list => this.collegue = list)
     // TODO ajouter au tableau un nouveau collègue
     // TODO vider les champs de saisie

@@ -25,9 +25,12 @@
       </div><br>
   </form>
   <ngb-alert *ngIf="affichAlert" type="success" (close)="affichAlert=false">Le collègue {{collegue[collegue.length -1]._nom}} a été ajouté avec succès!</ngb-alert>
-  <div class="row">
-    <div class="col-4" *ngFor="let col of collegue">
-      <app-un-collegue [collegue]="col"></app-un-collegue>
-    </div>    
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a routerLink="/classique" RouterLinkActive="active-link" class="nav-link text-left">Classique</a>
+    <a routerLink="/tableau" RouterLinkActive="active-link" class="nav-link text-center">Tableau</a>
+    <a routerLink="/carrousel" RouterLinkActive="active-link" class="nav-link text-rigth">Carrousel</a>
+  </nav>
+  <div id="content">
+    <router-outlet></router-outlet>
   </div>
-</div>
+</div> 

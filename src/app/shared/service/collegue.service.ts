@@ -4,6 +4,8 @@ import { Collegue } from '../domain/collegue';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
+import { environment } from '../../../environments/environment'
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 }
@@ -19,8 +21,7 @@ export class CollegueService {
   listerCollegues():Promise<Collegue[]> {
     // TODO effectuer la liste des collègues
     // TODO retourner l'objet Promise<Collegue[]>
-    return this.http.get<Collegue[]>("http://localhost:8080/collegues").toPromise()
-    
+    return this.http.get<Collegue[]>(environment.apiUrl+"/collegues").toPromise() 
     /*return new Promise((resolve, reject) => {
       if (this.collegues) {
         resolve(this.collegues);
@@ -34,7 +35,8 @@ export class CollegueService {
   sauvegarder(newCollegue:Collegue):Promise<Collegue[]> {
     // TODO sauvegarder le nouveau collègue
     // TODO retourner l'objet Promise<Collegue[]>
-    return this.http.post<Collegue[]>("http://localhost:8080/collegues", newCollegue, httpOptions).toPromise()
+    return this.http.post<Collegue[]>(environment.apiUrl+"/collegues", newCollegue, httpOptions).toPromise()
+    
     /*return new Promise((resolve, reject) => {
       if (newCollegue && this.collegues) {
         this.collegues.push(newCollegue)
@@ -49,7 +51,7 @@ export class CollegueService {
   aimerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
     // TODO Aimer un collègue
     unCollegue._score+=10
-    return this.http.post<Collegue>('http://localhost:8080/collegues/'+ unCollegue._nom + '/score', unCollegue, httpOptions).toPromise()
+    return this.http.post<Collegue>(environment.apiUrl+"/collegues"+ unCollegue._nom + '/score', unCollegue, httpOptions).toPromise()
     /*return new Promise((resolve, reject) => {
       if(unCollegue){
         resolve(unCollegue)
@@ -62,7 +64,7 @@ export class CollegueService {
   detesterUnCollegue(unCollegue:Collegue):Promise<Collegue> {
     // TODO Détester un collègue
     unCollegue._score-=5
-    return this.http.post<Collegue>('http://localhost:8080/collegues/'+ unCollegue._nom + '/score', unCollegue, httpOptions).toPromise()
+    return this.http.post<Collegue>(environment.apiUrl+"/collegues"+ unCollegue._nom + '/score', unCollegue, httpOptions).toPromise()
     /*return new Promise((resolve, reject) => {
       if(unCollegue){  
         resolve (unCollegue);

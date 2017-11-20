@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="row">    
+    <table class="table">
+      <thead>
+          <tr>
+            <th scope="col">Photo</th>
+            <th scope="col">Nom</th>
+            <th scope="col">score</th>
+            <th scope="col">vote</th>
+          </tr>
+      </thead>
+      <tbody >
+        <tr  *ngFor="let col of collegue">
+        <td>
+          <img class="card-img-top" [src]="col._urlImage" alt="{{col.pseudo}}">
+        </td>
+        <td class="">
+          <h3>{{col._nom}}</h3>
+        </td>
+        <td>
+          <h6>{{col._score}}</h6>
+        </td>
+        <td>
+          
+          <button class="btn btn-success" (click)="jaime()">J'aime</button>
+          <button class="btn btn-danger" (click)="jeDeteste()">Je déteste</button>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  

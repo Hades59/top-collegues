@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnCollegueComponent } from './un-collegue.component';
+import { CarrouselComponent } from './carrousel.component';
 
-describe('UnCollegueComponent', () => {
-  let component: UnCollegueComponent;
-  let fixture: ComponentFixture<UnCollegueComponent>;
+describe('CarrouselComponent', () => {
+  let component: CarrouselComponent;
+  let fixture: ComponentFixture<CarrouselComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UnCollegueComponent ]
+      declarations: [ CarrouselComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UnCollegueComponent);
+    fixture = TestBed.createComponent(CarrouselComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
