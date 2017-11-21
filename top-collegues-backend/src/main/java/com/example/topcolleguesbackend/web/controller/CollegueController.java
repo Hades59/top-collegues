@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.topcolleguesbackend.entity.Collegue;
 import com.example.topcolleguesbackend.repository.CollegueRepository;
+import com.example.topcolleguesbackend.util.Avis;
 
 
 //RestController combine ResponseBody et Controller
@@ -37,10 +38,19 @@ public class CollegueController {
 		return repoCol.findAll();
 	}
 	
-	@PutMapping
-	public Collegue MiseAjourScoreCollegue(@PathVariable String nom, @PathVariable Integer score){
+	@RequestMapping(value="{nom}/score", method=RequestMethod.PUT)
+	public Collegue MiseAjourScoreCollegue(@PathVariable String nom, @RequestBody Avis avis){
 		Collegue colEnBase = repoCol.findByNom(nom);
-		colEnBase.setScore(score);
+		System.out.println("Bijour");
+		System.out.println(avis);
+		if(avis.getAvis().equals("jaime")){
+			System.out.println("Bijour2");
+			colEnBase.setScore(colEnBase.getScore()+10);
+		}
+		else if(avis.getAvis().equals("jedeteste")){
+			System.out.println("Bijour3");
+			colEnBase.setScore(colEnBase.getScore()-5);
+		}
 		return repoCol.save(colEnBase);
 	}
 }

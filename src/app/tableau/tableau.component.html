@@ -1,5 +1,11 @@
-<div class="row">
-    <div class="row">    
+    <div class="input-group">
+        <span for="limite" class="input-group-addon">Limiter à: </span>
+        <input type="text" class="form-control"  (keyup)="onLimit($event)" placeholder="Tous">
+    </div><br>
+    <div class="input-group">
+        <span for="filtre" class="input-group-addon">Filtre par pseudo: </span>
+        <input type="text" class="form-control" (keyup)="onFilter($event)" placeholder="Aucun">
+    </div><br>    
     <table class="table">
       <thead>
           <tr>
@@ -10,7 +16,7 @@
           </tr>
       </thead>
       <tbody >
-        <tr  *ngFor="let col of collegue">
+        <tr  *ngFor="let col of collegue | slice:0:limite | filter:filtre">
         <td>
           <img class="card-img-top" [src]="col._urlImage" alt="{{col.pseudo}}">
         </td>
@@ -18,16 +24,14 @@
           <h3>{{col._nom}}</h3>
         </td>
         <td>
-          <h6>{{col._score}}</h6>
+          <h3 innerHTML = "{{col._score|score}}"></h3>
         </td>
         <td>
           
-          <button class="btn btn-success" (click)="jaime()">J'aime</button>
-          <button class="btn btn-danger" (click)="jeDeteste()">Je déteste</button>
+          <button class="btn btn-outline-success" (click)="jaime(col)">J'aime</button>
+          <button class="btn btn-outline-danger" (click)="jeDeteste(col)">Je déteste</button>
         </td>
         </tr>
       </tbody>
     </table>
-  </div>
-</div>
   

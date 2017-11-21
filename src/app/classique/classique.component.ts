@@ -18,7 +18,7 @@ export class ClassiqueComponent extends Contener implements OnInit {
 
   onLimit($event){
     if ( $event.target.value == "" || $event.target.value == null) {
-      this.limite=this.collegueService.collegues.length
+      this.limite=this.collegue.length
     }else{
       this.limite=$event.target.value
     }

@@ -1,29 +1,19 @@
-<div class="row">
-  <!--   <div class="row">
-        <div class="col-4" *ngFor="let col of collegue">
-        </div>    
-    </div>-->
-    
-    <ngb-carousel>
-      <ng-template *ngFor="let col of collegue" ngbSlide>
-          <img src="{{col._urlImage}}" alt="{{col.pseudo}}">
-        <div class="carousel-caption">
-          <h3>{{col._nom}}</h3>
-          <h6>{{col._score}}</h6>
-          <button class="btn btn-success" (click)="jaime()">J'aime</button>
-          <button class="btn btn-danger" (click)="jeDeteste()">Je déteste</button>
-        </div>
-      </ng-template>
-    </ngb-carousel>
- <!--   <div class="carousel-inner">
-        <div style="width:100%;height:100%;" class="carousel-item active">
-            <img class="card-img-top" [src]="col._urlImage" alt="{{col.pseudo}}">
-          </div>
-      <div class="carousel-item">
-        <h3>{{col._nom}}</h3>
-        <h6>{{col._score}}</h6>
-        <button class="btn btn-success" (click)="jaime()">J'aime</button>
-        <button class="btn btn-danger" (click)="jeDeteste()">Je déteste</button>
-      </div>
-    </div>-->
-  </div>
+<div class="input-group">
+    <span for="limite" class="input-group-addon">Limiter à: </span>
+    <input type="text" class="form-control"  (keyup)="onLimit($event)" placeholder="Tous">
+</div><br>
+<div class="input-group">
+    <span for="filtre" class="input-group-addon">Filtre par pseudo: </span>
+    <input type="text" class="form-control" (keyup)="onFilter($event)" placeholder="Aucun">
+</div><br> 
+<ngb-carousel>
+  <ng-template *ngFor="let col of collegue | slice:0:limite | filter:filtre" ngbSlide>
+    <img src="{{col._urlImage}}" alt="{{col.pseudo}}">
+    <div class="carousel-caption">
+      <h3>{{col._nom}}</h3>
+      <h4 innerHTML="{{col._score}}"></h4>
+      <button class="btn btn-success" (click)="jaime(col)">J'aime</button>
+      <button class="btn btn-danger" (click)="jeDeteste(col)">Je déteste</button>
+    </div>
+  </ng-template>
+</ngb-carousel>

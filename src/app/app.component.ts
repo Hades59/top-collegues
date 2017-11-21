@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
     // pour récupérer la valeur saisie, utiliser la propriété value
     // exemple => pseudo.value
     this.collegueService.sauvegarder(new Collegue(pseudo.value,imageUrl.value,0))
-    .then(list => this.collegue = list)
+    .subscribe(list => this.collegue = list)
     // TODO ajouter au tableau un nouveau collègue
     // TODO vider les champs de saisie
     this.affichAlert = true

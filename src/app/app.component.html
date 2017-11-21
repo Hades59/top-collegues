@@ -1,5 +1,6 @@
 <div class="container">
-  <form>
+  <form><br>
+    <span class="badge badge-primary float-right">En Ligne</span><br>
     <div class="form-group-row-md">
       <div class="col-md-12">
         <h1>Top Collègues</h1>
@@ -15,7 +16,7 @@
         <div class="form-group row">
           <label for="personne" class="col-md-2 form-label">URL Image</label>
           <div class="col-md-9">
-            <input type="text" placeholder="url image" class="form-control" #imageUrl>
+            <input type="text" placeholder="adresse de l'image" class="form-control" #imageUrl>
           </div>
         </div><br>
         <div class="form-group-row-md">
@@ -29,8 +30,6 @@
     <a routerLink="/classique" RouterLinkActive="active-link" class="nav-link text-left">Classique</a>
     <a routerLink="/tableau" RouterLinkActive="active-link" class="nav-link text-center">Tableau</a>
     <a routerLink="/carrousel" RouterLinkActive="active-link" class="nav-link text-rigth">Carrousel</a>
-  </nav>
-  <div id="content">
+  </nav><br>
     <router-outlet></router-outlet>
-  </div>
 </div> 

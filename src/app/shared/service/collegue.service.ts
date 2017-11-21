@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment'
+import { Observable } from 'rxjs/Observable';
+import { Subject, BehaviorSubject } from 'rxjs/Rx';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,63 +16,56 @@ const httpOptions = {
 export class CollegueService {
 
   // données en mémoire
-  collegues:Collegue[] = []
+collegues: Subject<Collegue[]> = new BehaviorSubject([])
+  colleguesTab:Collegue[] = []
 
   constructor(private http:HttpClient) { }
 
-  listerCollegues():Promise<Collegue[]> {
+  refresh():void{
+    this.http.get<Collegue[]>(`${environment.apiUrl}/collegues`)
+    .subscribe(cols => this.collegues.next(cols))
+  }
+
+  listerCollegues():Observable<Collegue[]> {
     // TODO effectuer la liste des collègues
     // TODO retourner l'objet Promise<Collegue[]>
-    return this.http.get<Collegue[]>(environment.apiUrl+"/collegues").toPromise() 
-    /*return new Promise((resolve, reject) => {
-      if (this.collegues) {
-        resolve(this.collegues);
-      }
-      else {
-        reject(Error("La liste ne s'affiche pas!!!"));
-      }    
-    })*/
+    this.refresh()
+    return this.collegues.asObservable()
   }
 
-  sauvegarder(newCollegue:Collegue):Promise<Collegue[]> {
+  sauvegarder(newCollegue:Collegue):Observable<Collegue[]> {
     // TODO sauvegarder le nouveau collègue
     // TODO retourner l'objet Promise<Collegue[]>
-    return this.http.post<Collegue[]>(environment.apiUrl+"/collegues", newCollegue, httpOptions).toPromise()
-    
-    /*return new Promise((resolve, reject) => {
-      if (newCollegue && this.collegues) {
-        this.collegues.push(newCollegue)
-        resolve(newCollegue);
-      }
-      else {
-        reject(Error("Sauvegarde impossible!!!"));
-      }    
+    /*this.collegues.map(tab => {
+      tab.push(newCollegue)
+      return tab
     })*/
+
+    this.http.post<Collegue[]>(`${environment.apiUrl}/collegues`, newCollegue, httpOptions)
+    .subscribe(cols => {    
+      this.colleguesTab.push(newCollegue)
+      this.collegues.next(this.colleguesTab)
+    })
+    return this.collegues.asObservable()
   }
 
-  aimerUnCollegue(unCollegue:Collegue):Promise<Collegue> {
+  aimerUnCollegue(unCollegue:Collegue):Observable<Collegue[]> {
     // TODO Aimer un collègue
     unCollegue._score+=10
-    return this.http.post<Collegue>(environment.apiUrl+"/collegues"+ unCollegue._nom + '/score', unCollegue, httpOptions).toPromise()
-    /*return new Promise((resolve, reject) => {
-      if(unCollegue){
-        resolve(unCollegue)
-      }else{
-        reject(Error("Erreur: aimer collegue"))
-      }
-    })*/
+    this.http.put<Collegue[]>(`${environment.apiUrl}/collegues/`+`${unCollegue._nom}/score`, {"avis":"jaime"}, httpOptions)
+    .subscribe(col => {
+      this.collegues.next(this.colleguesTab)
+    })
+    return this.collegues.asObservable()
   }
 
-  detesterUnCollegue(unCollegue:Collegue):Promise<Collegue> {
+  detesterUnCollegue(unCollegue:Collegue):Observable<Collegue[]> {
     // TODO Détester un collègue
     unCollegue._score-=5
-    return this.http.post<Collegue>(environment.apiUrl+"/collegues"+ unCollegue._nom + '/score', unCollegue, httpOptions).toPromise()
-    /*return new Promise((resolve, reject) => {
-      if(unCollegue){  
-        resolve (unCollegue);
-      }else{
-        reject(Error("Erreur: détester collegue"))
-      }   
-    })*/
+    this.http.put<Collegue[]>(`${environment.apiUrl}/collegues/`+`${unCollegue._nom}/score`, {"avis":"jedeteste"}, httpOptions)
+    .subscribe(col => {
+      this.collegues.next(this.colleguesTab)
+    })
+    return this.collegues.asObservable()
   }
 }

@@ -3,13 +3,10 @@
  */
 package com.example.topcolleguesbackend.web.controller;
 
-import java.util.stream.Stream;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.topcolleguesbackend.entity.Collegue;
 import com.example.topcolleguesbackend.repository.CollegueRepository;
 
 /**
